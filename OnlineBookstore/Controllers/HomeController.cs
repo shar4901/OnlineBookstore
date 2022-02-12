@@ -11,16 +11,22 @@ namespace OnlineBookstore.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private IBookStoreRepository repo;
 
-        public HomeController(ILogger<HomeController> logger)
+
+        public HomeController(IBookStoreRepository temp)
         {
-            _logger = logger;
+            repo = temp;
         }
 
         public IActionResult Index()
         {
-            return View();
+
+            IQueryable<Book> booklist = repo.Books
+                .OrderBy(x => x.Title)
+                .Take(10);
+
+            return View(booklist);
         }
 
         public IActionResult Privacy()
