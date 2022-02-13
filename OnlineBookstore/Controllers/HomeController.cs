@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OnlineBookstore.Models;
+using OnlineBookstore.Models.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -19,14 +20,27 @@ namespace OnlineBookstore.Controllers
             repo = temp;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int pageNum = 1)
         {
+            int pageSize = 5;
 
-            IQueryable<Book> booklist = repo.Books
+            var BookListViewModel = new BookListViewModel
+            {
+                Books = repo.Books
                 .OrderBy(x => x.Title)
-                .Take(10);
+                .Skip((pageNum - 1) * pageSize)
+                .Take(pageSize),
 
-            return View(booklist);
+                PageInfo = new PageInfo
+                {
+                    TotalBooks = repo.Books.Count(),
+                    BooksPerPage = pageSize,
+                    CurrentPage = pageNum
+                }
+
+            };
+
+            return View(BookListViewModel);
         }
 
         public IActionResult Privacy()
