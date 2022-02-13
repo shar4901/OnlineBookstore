@@ -22,7 +22,7 @@ namespace OnlineBookstore.Controllers
 
         public IActionResult Index(int pageNum = 1)
         {
-            int pageSize = 5;
+            int pageSize = 12;
 
             var BookListViewModel = new BookListViewModel
             {

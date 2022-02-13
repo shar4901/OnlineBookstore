@@ -8,20 +8,43 @@
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 
+<div class="container">
 
-<h3>Book List</h3>
+    <div class="container">
+        <div class="Row">
+            <div class="col-4" style="text-align:center">
+                <h3>Book List</h3>
+            </div>
+        </div>
+    </div>
 
-@foreach (var book in Model.Books)
+
+    <div class="container">
+        <div class="Row">
+            @foreach (var book in Model.Books)
             {
-                <h5>@book.Title</h5>
-                <ul>
-                    <li>Author: @book.Author</li>
-                    <li>Category: @book.Category</li>
-                    <li>Classification: @book.Classification</li>
-                    <li>Page Count: @book.PageCount</li>
-                    <li>Price: @book.Price</li>
-                    <li>Publisher: @book.Publisher</li>
-                    <li>Isbn: @book.Isbn</li>
-                </ul>
-                <br />
+                <div class="col-6">
+
+                    <h5 style="font-weight:bold">@book.Title</h5>
+                    <ul>
+                        <li>Author: @book.Author</li>
+                        <li>Category: @book.Category</li>
+                        <li>Classification: @book.Classification</li>
+                        <li>Page Count: @book.PageCount</li>
+                        <li>Price: @book.Price</li>
+                        <li>Publisher: @book.Publisher</li>
+                        <li>Isbn: @book.Isbn</li>
+                    </ul>
+                    <br />
+                </div>
+
             }
+        </div>
+    </div>
+
+
+
+
+    <div page-number="@Model.PageInfo" page-action="Index"></div>
+
+</div>
