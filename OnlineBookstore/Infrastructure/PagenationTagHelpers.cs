@@ -44,7 +44,7 @@ namespace OnlineBookstore.Infrastructure
             {
                 TagBuilder tb = new TagBuilder("a");
                 tb.Attributes["href"] = uh.Action(PageAction, new { pageNum = i });
-                tb.InnerHtml.Append("Page: " + i.ToString() + "\t");
+                tb.InnerHtml.Append(i.ToString() + "\t");
                 if (PageClassesEnabled)
                 {
                     tb.AddCssClass(PageClass);

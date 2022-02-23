@@ -3,19 +3,9 @@
 }
 
 @model BookListViewModel
-@foreach (var p in Model.Books)
+@foreach (var book in Model.Books)
 {
-    <div class="card card-outline-primary m-1 p-1">
-        <div class="bg-faded p-1">
-            <h4>
-                @p.Title
-                <span class="badge badge-pill badge-primary" style="float:right">
-                    <small>@p.Price.ToString("c")</small>
-                </span>
-            </h4>
-        </div>
-        <div class="card-text p-1">@p.Category</div>
-    </div>
+    <partial name="BookSummary" model="book"/>
 }
 <div page-number="@Model.PageInfo" page-action="Index" page-classes-enabled="true"
      page-class="btn" page-class-normal="btn-outline-dark"
