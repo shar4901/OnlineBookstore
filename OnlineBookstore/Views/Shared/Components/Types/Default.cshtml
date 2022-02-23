@@ -1,0 +1,16 @@
+﻿
+@{
+}
+
+@model IEnumerable<string>
+
+<div class="p-2 m-2">
+    <a asp-controller="Home" asp-action="Index" asp-route-bookType="" asp-route-pageNum="1" class="btn btn-outline-secondary">Home</a>
+
+
+    @foreach (string types in Model)
+    {
+        <a asp-controller="Home" asp-action="Index" asp-route-bookType="@types" asp-route-pageNum="1" 
+           class="btn @(ViewBag.SelectedType == types ? "btn-primary" : "btn-outline-secondary")">@types</a>
+    }
+</div>
