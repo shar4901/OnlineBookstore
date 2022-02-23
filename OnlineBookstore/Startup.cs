@@ -63,10 +63,26 @@ namespace OnlineBookstore
             {
 
                 //Add Endpoints
+                endpoints.MapControllerRoute(
+                    "typebook",
+                    "{bookType}/Page{pageNum}",
+                    new { Controller = "Home", Action = "Index" });
+
 
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    "paging",
+                    "Page{pageNum}",
+                    new { Controller = "Home", Action = "Index", pageNum = 1 });
+
+                endpoints.MapControllerRoute(
+                    "category",
+                    "{bookType}",
+                    new { Controller = "Home", Action = "Index", pageNum = 1 });
+
+
+                endpoints.MapDefaultControllerRoute();
+
+                endpoints.MapRazorPages();
             });
         }
     }
