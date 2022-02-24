@@ -15,19 +15,27 @@
         </tr>
     </thead>
 
-    @*<tbody>
-        @foreach(var i in Model.Books)
+    <tbody>
+        @foreach(var i in Model.basket.Items)
             {
                 <tr>
-
+                    <td>@i.Book.Title</td>
+                    <td>@i.Quantity.</td>
+                    <td>@i.Book.Price</td>
+                    <td>@(i.Quantity * i.Book.Price)</td>
                 </tr>
             }
-    </tbody>*@
+    </tbody>
 
     <tfoot>
         <tr>
-
+            <td colspan="3">Total: </td>
+            <td>@Model.basket.CalculateTotal().ToString("c")</td>
         </tr>
     </tfoot>
 
 </table>
+
+<div class="row">
+    <a class="btn btn-primary btn-success float-right" href="@Model.ReturnUrl">Keep Shoping</a>
+</div>
