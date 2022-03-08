@@ -1,0 +1,44 @@
+﻿@page "/admin/orders"
+@page "/admin"
+
+@inherits OwningComponentBase<IPurchaseRepository>
+
+<OrderTable TableTitle="Unshipped Orders"
+            Purchases="UnshippedPurchases" ButtonLabel="Ship" OrderSelected="ShipOrder" />
+<OrderTable TableTitle="Shipped Orders"
+            Purchases="ShippedPurchases" ButtonLabel="Reset" OrderSelected="ResetOrder" />
+<button class="btn btn-info" @onclick="@(e => UpdateData())">Refresh Data</button>
+@code{
+
+    public IPurchaseRepository repo => Service;
+
+    public IEnumerable<Purchase> AllPurchases { get; set; }
+    public IEnumerable<Purchase> UnshippedPurchases { get; set; }
+    public IEnumerable<Purchase> ShippedPurchases { get; set; }
+
+
+    protected async override Task OnInitializedAsync()
+    {
+        await UpdateData();
+    }
+
+    public async Task UpdateData()
+    {
+        AllPurchases = await repo.Purchases.ToListAsync();
+        UnshippedPurchases = AllPurchases.Where(x => !x.Shipped);
+        ShippedPurchases = AllPurchases.Where(x => x.Shipped);
+
+
+    }
+
+    public void ShipOrder(int id) => UpdateDonation(id, true);
+
+    public void ResetOrder(int id) => UpdateDonation(id, false);
+
+    public void UpdateDonation(int id, bool shipValue)
+    {
+        Purchase p = repo.Purchases.FirstOrDefault(x => x.PurchaseId == id);
+        p.Shipped = shipValue;
+        repo.SavedPurchase(p);
+    }
+}
