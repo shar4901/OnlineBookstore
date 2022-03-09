@@ -15,5 +15,20 @@ namespace OnlineBookstore.Models
 
         public IQueryable<Book> Books => context.Books;
 
+        public void CreateProduct(Book p)
+        {
+            context.Add(p);
+            context.SaveChanges();
+        }
+        public void DeleteProduct(Book p)
+        {
+            context.Remove(p);
+            context.SaveChanges();
+        }
+        public void SaveProduct(Book p)
+        {
+            context.SaveChanges();
+        }
+
     }
 }
