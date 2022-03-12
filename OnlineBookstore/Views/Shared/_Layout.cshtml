@@ -13,8 +13,13 @@
     <div class="bg-dark text-white p-2">
         <div class="container-fluid">
             <div class="row">
-                <div class="col navbar-brand">SPORTS STORE</div>
-                <div class="col-6 text-right">
+                <div class="col-8 navbar-brand nav-tabs navbar-collapse">
+                    Book Store
+                </div>
+                <div class="col text-right m-2 p-2">
+                    <a class="btn btn-warning" href="/Admin">Admin</a>
+                </div>
+                <div class="col text-right m-2 p-2">
                     <vc:cart-summary />
                 </div>
             </div>
@@ -24,11 +29,11 @@
 
     <div class="row m-1 p-1">
 
-        <div id="categories" class="col-3">
+        <div id="categories" class="col-3 bg-light">
             <vc:types></vc:types>
         </div>
 
-        <div class="col-9">
+        <div class="col-8 m-2 p-2">
             @RenderBody()
         </div>
 
